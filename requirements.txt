@@ -3,3 +3,4 @@ spectral
 pytest
 matplotlib
 pandas
+scipy
