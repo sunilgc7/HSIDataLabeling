@@ -4,3 +4,4 @@ pytest
 matplotlib
 pandas
 scipy
+opencv-python
