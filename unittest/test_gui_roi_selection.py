@@ -11,4 +11,5 @@ def test_get_hsi_image(image_dir_path):
   """
   This test compares the means of two treatment groups using a two-tailed t-test.
   """
-  read_hsi(image_dir_path,mouse_callback)
+  label_image_folder = "/home/developer/SGCPostDOC/data/labeled"
+  read_hsi(image_dir_path,label_image_folder)

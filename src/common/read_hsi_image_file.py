@@ -5,35 +5,7 @@ import matplotlib.pyplot as plt
 import cv2
 from ..utils.rectangle_drawer import *
 
-
-start_point = None
-end_point = None
-drawing = False
-
-def mouse_callback(event, x, y, flags, param):
-    global start_point, end_point, drawing, image
-
-    # On left mouse button down, record the starting coordinates
-    if event == cv2.EVENT_LBUTTONDOWN:
-        start_point = (x, y)
-        drawing = True
-
-    # On mouse move, update the ending coordinates and draw the rectangle
-    elif event == cv2.EVENT_MOUSEMOVE:
-        if drawing:
-            end_point = (x, y)
-            temp_image = image.copy()
-            cv2.rectangle(temp_image, start_point, end_point, (0, 255, 0), 2)
-            cv2.imshow("Image", temp_image)
-
-    # On left mouse button up, record the ending coordinates and draw the final rectangle
-    elif event == cv2.EVENT_LBUTTONUP:
-        end_point = (x, y)
-        drawing = False
-        cv2.rectangle(image, start_point, end_point, (0, 255, 0), 2)
-        cv2.imshow("Image", image)
-
-def read_hsi(image_dir_path,callback):
+def read_hsi(image_dir_path,label_dir):
     print("*******************************")
     global image
     dir_list = os.listdir(image_dir_path)
@@ -73,7 +45,7 @@ def read_hsi(image_dir_path,callback):
     clone = image.copy()
 
     # Usage
-    drawer = RectangleDrawer(image,clone)
+    drawer = RectangleDrawer(image,clone,data_ref_array,label_dir)
     drawer.draw_rectangle()
 
     # After drawing, get the coordinates of the rectangle
