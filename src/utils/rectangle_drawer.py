@@ -11,7 +11,7 @@ class RectangleDrawer:
         self.hcube = hcube
         self.label_dir = label_dir
 
-    def create_directory(directory_path):
+    def create_directory(self,directory_path):
         if not os.path.exists(directory_path):
             os.makedirs(directory_path)
 
