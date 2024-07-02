@@ -1,6 +1,8 @@
 import cv2
 import os
-import numpy as np 
+import numpy as np
+import time
+
 
 class RectangleDrawer:
     def __init__(self,image,clone,hcube,label_dir):
@@ -17,7 +19,6 @@ class RectangleDrawer:
             os.makedirs(directory_path)
 
     def mouse_callback(self, event, x, y, flags, param):
-        i=0
         if event == cv2.EVENT_LBUTTONDOWN:
             self.start_point = (x, y)
             self.drawing = True
@@ -41,9 +42,9 @@ class RectangleDrawer:
             self.create_directory(save_dir_path)
             cropped_image = self.image[self.start_point[1]:self.end_point[1], self.start_point[0]:self.end_point[0]]
             cropped_cube =  self.hcube[self.start_point[1]:self.end_point[1], self.start_point[0]:self.end_point[0],:]
-            cv2.imwrite(save_dir_path+"/"+roi_name+str(i)+".jpg", cropped_image)
-            np.save(save_dir_path+"/"+roi_name+str(i), cropped_cube)
-            i=i+1
+            epoch_millis = int(time.time() * 1000)
+            cv2.imwrite(save_dir_path+"/"+roi_name+"_"+str(epoch_millis)+".jpg", cropped_image)
+            np.save(save_dir_path+"/"+roi_name+"_"+str(epoch_millis), cropped_cube)
             cv2.imshow("Image", self.image)
 
     def draw_rectangle(self):
