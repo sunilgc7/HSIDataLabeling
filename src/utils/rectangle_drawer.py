@@ -1,5 +1,6 @@
 import cv2
 import os
+import numpy as np 
 
 class RectangleDrawer:
     def __init__(self,image,clone,hcube,label_dir):
@@ -39,7 +40,9 @@ class RectangleDrawer:
             save_dir_path = self.label_dir+"/"+roi_name
             self.create_directory(save_dir_path)
             cropped_image = self.image[self.start_point[1]:self.end_point[1], self.start_point[0]:self.end_point[0]]
+            cropped_cube =  self.hcube[self.start_point[1]:self.end_point[1], self.start_point[0]:self.end_point[0],:]
             cv2.imwrite(save_dir_path+"/"+roi_name+str(i)+".jpg", cropped_image)
+            np.save(save_dir_path+"/"+roi_name+str(i), cropped_cube)
             i=i+1
             cv2.imshow("Image", self.image)
 
