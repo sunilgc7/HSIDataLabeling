@@ -1,0 +1,7 @@
+numpy
+spectral
+pytest
+matplotlib
+pandas
+scipy
+opencv-python
